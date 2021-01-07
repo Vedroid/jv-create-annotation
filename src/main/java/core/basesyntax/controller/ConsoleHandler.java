@@ -23,7 +23,7 @@ public class ConsoleHandler {
         while (true) {
             System.out.println("Enter your name:");
             String name = scanner.nextLine();
-            if (!name.isEmpty()) {
+            if (!name.isEmpty() && name.matches("[A-Za-z]+")) {
                 userDao.add(new User(name));
                 return;
             }
