@@ -9,8 +9,9 @@ import core.basesyntax.model.User;
 import java.util.Scanner;
 
 public class ConsoleHandler {
-    BetDao betDao = new BetDaoImpl();
-    UserDao userDao = new UserDaoImpl();
+    private static final String EXIT_COMMAND = "q";
+    private BetDao betDao = new BetDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
 
     public void handle() {
         Scanner scanner = new Scanner(System.in);
@@ -21,8 +22,11 @@ public class ConsoleHandler {
 
     private void enterUserName(Scanner scanner) {
         while (true) {
-            System.out.println("Enter your name:");
+            System.out.println("Enter your name:  (enter 'q' to exit)");
             String name = scanner.nextLine();
+            if (name.equalsIgnoreCase(EXIT_COMMAND)) {
+                return;
+            }
             if (!name.isEmpty() && name.matches("[A-Za-z]+")) {
                 userDao.add(new User(name));
                 return;
@@ -35,7 +39,7 @@ public class ConsoleHandler {
         while (true) {
             System.out.println("Enter value and risk for your bet:  (enter 'q' to exit)");
             String command = scanner.nextLine();
-            if (command.equalsIgnoreCase("q")) {
+            if (command.equalsIgnoreCase(EXIT_COMMAND)) {
                 return;
             }
             try {
