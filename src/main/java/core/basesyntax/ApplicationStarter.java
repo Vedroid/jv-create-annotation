@@ -11,7 +11,7 @@ public class ApplicationStarter {
         ConsoleHandler consoleHandler = (ConsoleHandler) Injector.getInstance(ConsoleHandler.class);
         consoleHandler.handle();
 
-        Storage.bets.forEach(bet ->
-                System.out.println("Value: " + bet.getValue() + ", risk: " + bet.getRisk()));
+        Storage.users.forEach(System.out::println);
+        Storage.bets.forEach(System.out::println);
     }
 }

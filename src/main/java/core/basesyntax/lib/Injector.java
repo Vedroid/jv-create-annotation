@@ -18,9 +18,9 @@ public class Injector {
             if (field.getAnnotation(Inject.class) != null) {
                 field.setAccessible(true);
                 Class<?> fieldType = field.getType();
-                for (Class<?> aClass : reflectionsScan(Dao.class)) {
-                    if (Arrays.stream(aClass.getInterfaces()).anyMatch(c -> c == fieldType)) {
-                        Object daoByType = Factory.getDaoByType(aClass);
+                for (Class<?> foundClass : reflectionsScan(Dao.class)) {
+                    if (Arrays.stream(foundClass.getInterfaces()).anyMatch(c -> c == fieldType)) {
+                        Object daoByType = Factory.getDaoByType(foundClass);
                         if (daoByType == null) {
                             throw new DaoAnnotationException("Proper annotation Dao does not exist."
                                     + " Field: " + field.getName());
